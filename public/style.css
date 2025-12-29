@@ -1,0 +1,164 @@
+/* --- MOBILE RESPONSIVENESS --- */
+
+@media (max-width: 768px) {
+    /* 1. Adjust Hero Height */
+    .hero-section {
+        height: 300px;
+    }
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+
+    /* 2. Stack the Tribute Grid into 1 Column */
+    .tribute-grid {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+
+    /* 3. Fix the Individual Tribute Page Layout */
+    /* Changes the 2-column layout (Bio | Guestbook) into a single stack */
+    div[style*="grid-template-columns: 2fr 1fr"] {
+        grid-template-columns: 1fr !important;
+        display: block !important;
+    }
+
+    /* 4. Shrink the Profile Header */
+    div[style*="display: flex; align-items: center; gap: 40px"] {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px !important;
+    }
+
+    /* 5. Adjust Header Image Size */
+    img[style*="width: 250px"] {
+        width: 150px !important;
+        height: 150px !important;
+    }
+
+    /* 6. Navigation Bar */
+    .nav .container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .nav a {
+        margin: 0 10px;
+        font-size: 0.9rem;
+    }
+
+    /* 7. Admin Tables */
+    table {
+        display: block;
+        overflow-x: auto; /* Allows side-scrolling on small tables */
+        white-space: nowrap;
+    }
+}
+
+:root { --navy: #1a2a3a; --blue: #3498db; --light: #f4f7f6; }
+body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--light); color: #333; }
+.container { max-width: 1100px; margin: auto; padding: 0 20px; }
+
+/* Hero */
+.hero-section { height: 400px; background-size: cover; background-position: center; position: relative; color: white; }
+.hero-overlay { background: rgba(0,0,0,0.5); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; text-align: center; }
+
+/* Grid */
+.tribute-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding: 40px 0; }
+.card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-decoration: none; color: inherit; transition: 0.2s; }
+.card:hover { transform: translateY(-5px); }
+.card img { width: 100%; height: 200px; object-fit: cover; }
+.card-content { padding: 15px; }
+
+/* Mobile Fixes */
+@media (max-width: 768px) {
+    .hero-section { height: 250px; }
+    .tribute-grid { grid-template-columns: 1fr; }
+    .nav-content { flex-direction: column; text-align: center; }
+}
+
+.btn { background: var(--blue); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; text-decoration: none; display: inline-block; }
+.nav { background: var(--navy); color: white; padding: 15px 0; }
+.nav-content { display: flex; justify-content: space-between; align-items: center; }
+.nav a { color: white; text-decoration: none; margin-left: 15px; }
+
+:root {
+    --primary-gradient: linear-gradient(135deg, #0d9488 0%, #0891b2 100%);
+    --bg-light: #f0fdfa; /* Soft teal background */
+    --input-bg: #f8fafc;
+    --text-dark: #0f172a;
+    --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+.auth-card {
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    max-width: 400px;
+    width: 90%;
+    margin: 40px auto;
+}
+
+.auth-card h2 {
+    color: #0d9488;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.auth-card p {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+}
+
+.modern-input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    background: var(--input-bg);
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.modern-input:focus {
+    outline: none;
+    border-color: #0d9488;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.1);
+}
+
+.btn-gradient {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    background: var(--primary-gradient);
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 14px 0 rgba(13, 148, 136, 0.39);
+}
+
+.btn-outline {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    background: #ecfdf5;
+    color: #0d9488;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}

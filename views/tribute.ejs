@@ -1,0 +1,66 @@
+<%- include('header') %>
+
+<main class="container">
+    <% if (userLoggedIn) { %>
+        <div style="background: #fff3cd; border: 1px solid #ffeeba; padding: 15px; border-radius: 8px; margin-top: 20px; display: flex; justify-content: center; gap: 15px;">
+            <span style="align-self: center; font-weight: bold; color: #856404;">Tribute Tools:</span>
+            
+            <a href="/tribute/<%= tribute.id %>/edit" class="btn" style="background: #f39c12; color: white; padding: 8px 20px;">Edit Information</a>
+            
+            <form action="/tribute/<%= tribute.id %>/delete" method="POST" onsubmit="return confirm('Are you sure you want to PERMANENTLY delete this tribute? This cannot be undone.')" style="display:inline;">
+                <button type="submit" class="btn" style="background: #e74c3c; color: white; padding: 16px 20px; border: none; cursor: pointer;">Delete Memorial</button>
+            </form>
+        </div>
+    <% } %>
+
+    <div style="text-align: center; margin-top: 30px; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+        <img src="<%= tribute.photo %>" alt="Portrait" style="width: 250px; height: 250px; border-radius: 50%; object-fit: cover; border: 5px solid #f4f7f6;">
+        <h1 style="font-size: 2.5rem; color: #1a2a3a; margin: 20px 0 5px;"><%= tribute.firstName %> <%= tribute.lastName %></h1>
+        <p style="font-style: italic; color: #3498db; font-size: 1.2rem;"><%= tribute.funeralHome %></p>
+        <p style="color: #666;">Service Date: <%= tribute.date %></p>
+        
+        <div style="max-width: 700px; margin: 30px auto; text-align: left; line-height: 1.6; color: #444; font-size: 1.1rem;">
+            <h3 style="border-bottom: 2px solid #f4f7f6; padding-bottom: 10px;">Obituary</h3>
+            <p><%= tribute.bio %></p>
+        </div>
+    </div>
+
+    <section style="margin-top: 50px;">
+        <h2 style="color: #1a2a3a; border-left: 5px solid #3498db; padding-left: 15px;">Tribute Book</h2>
+        
+        <div style="background: #fff; padding: 25px; border-radius: 8px; margin-bottom: 30px; border: 1px solid #ddd;">
+            <h3>Leave a message for the family</h3>
+            <form action="/tribute/<%= tribute.id %>/message" method="POST">
+                <input type="text" name="author" placeholder="Your Name" required style="width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <textarea name="message" placeholder="Share a memory..." rows="4" required style="width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+                <button type="submit" class="btn" style="background: #1a2a3a; color: white; padding: 12px 25px; border: none; border-radius: 4px; cursor: pointer;">Post Message</button>
+            </form>
+        </div>
+
+      <div class="messages-list">
+    <% if (messages && messages.length > 0) { %>
+        <% messages.forEach(msg => { %>
+            <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #3498db; position: relative;">
+                <p style="font-size: 1.1rem; color: #333;">"<%= msg.message %>"</p>
+                
+                <div style="display: flex; justify-content:建设; align-items: center; margin-top: 10px;">
+                    <form action="/message/<%= msg.id %>/like" method="POST" style="margin-right: auto;">
+                        <button type="submit" style="background: none; border: 1px solid #ffcccc; color: #e74c3c; padding: 5px 12px; border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 5px; font-size: 0.9rem;">
+                            ❤️ <%= msg.likes || 0 %>
+                        </button>
+                    </form>
+
+                    <p style="font-size: 0.9rem; color: #888; margin: 0;">
+                        — <strong><%= msg.author %></strong> on <%= msg.date %>
+                    </p>
+                </div>
+            </div>
+        <% }) %>
+    <% } else { %>
+        <p style="color: #888; font-style: italic;">No messages have been left yet.</p>
+    <% } %>
+</div>
+    </section>
+</main>
+
+<%- include('footer') %>
