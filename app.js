@@ -78,15 +78,15 @@ app.post('/register', async (req, res) => {
         res.send("Username already taken. <a href='/register'>Try again</a>");
     }
 });
-//
-//app.get('/register', (req, res) => res.render('register', { userLoggedIn: false }));
-//app.post('/register', async (req, res) => {
-  //  const { username, password } = req.body;
- //   try {
- //       await db.run("INSERT INTO users (username, password, isAdmin) VALUES (?, ?, 0)", [username, password]);
- //       res.redirect('/login');
-   // } catch (e) { res.send("User already exists or DB error. <a href='/register'>Try again</a>"); }
-//});
+
+app.get('/register', (req, res) => res.render('register', { userLoggedIn: false }));
+app.post('/register', async (req, res) => {
+    const { username, password } = req.body;
+   try {
+        await db.run("INSERT INTO users (username, password, isAdmin) VALUES (?, ?, 0)", [username, password]);
+        res.redirect('/login');
+    } catch (e) { res.send("User already exists or DB error. <a href='/register'>Try again</a>"); }
+});
 
 app.get('/login', (req, res) => res.render('login', { userLoggedIn: false }));
 app.post('/login', async (req, res) => {
